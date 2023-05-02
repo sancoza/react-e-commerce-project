@@ -1,13 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import {
-  signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
-} from '../utils/firebase/firebase.utils';
+  signInWithGooglePopup,
+  
+  
+} from '../../utils/firebase/firebase.utils';
 import { FormInput } from '../form-input/FormInput';
 import './SignIn.Form.style.scss';
 import { Button } from '../button/Button';
+
 
 const defaultformFields = {
   email: '',
@@ -17,24 +20,29 @@ export const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultformFields);
   const { email, password } = formFields;
 
+ 
+
   const resetFormFields = () => {
     setFormFields(defaultformFields);
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+   await signInWithGooglePopup();
+   
+    
+    
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
+      const { user } = await signInAuthUserWithEmailAndPassword(
+         email,
         password
-      );
-      console.log(response);
+      )
+      
+      
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -45,14 +53,8 @@ export const SignInForm = () => {
           alert('no user associated with this email');
           break;
         default:
-          console.log(error); 
+          console.log(error);
       }
-      // if(error.code === 'auth/wrong-password') {
-      //   alert('incorrect password for email');
-      // } else if (error.code === 'auth/user-not-found') {
-      //   alert('no user associated with this email');
-      // }
-      // console.log(error);
     }
   };
 
@@ -88,7 +90,7 @@ export const SignInForm = () => {
 
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type='button ' buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button " buttonType="google" onClick={signInWithGoogle}>
             sign in with google
           </Button>
         </div>

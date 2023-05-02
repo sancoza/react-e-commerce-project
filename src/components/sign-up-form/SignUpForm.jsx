@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from '../utils/firebase/firebase.utils';
+} from '../../utils/firebase/firebase.utils';
 import { FormInput } from '../form-input/FormInput';
 import './SignUp.Form.style.scss';
 import { Button } from '../button/Button';
@@ -33,6 +33,7 @@ export const SignUpForm = () => {
         email,
         password
       );
+
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
