@@ -8,7 +8,7 @@ import {
   
 } from '../../utils/firebase/firebase.utils';
 import { FormInput } from '../form-input/FormInput';
-import './SignIn.Form.style.scss';
+import { SignInContainer, ButtonsContainer } from './SignInForm.style';
 import { Button } from '../button/Button';
 
 
@@ -64,7 +64,7 @@ export const SignInForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignInContainer>
       <h2>Alredy have an account?</h2>
       <span>Sign in with your email and password </span>
       <form onSubmit={handleSubmit}>
@@ -88,13 +88,13 @@ export const SignInForm = () => {
           autoComplete="new-password"
         />
 
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button type="submit">Sign In</Button>
           <Button type="button " buttonType="google" onClick={signInWithGoogle}>
             sign in with google
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
